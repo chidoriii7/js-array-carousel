@@ -7,17 +7,17 @@ const imagesArray = [
 ]
 
 //arrivare a list-item
-const itemListDOMElement = document.querySelector('.list-item');
-const nextButton = document.querySelector('next')
-const prevButton = document.querySelector('prev')
+    const itemListDOMElement = document.querySelector('.list-item');
+//altre variabili e costanti
 
+    let Index = 0
 //le immagini sono già inserite
 
 //far comparire la prima immagine (active)
 //far slidare le immagini seguenti
 for (let i = 0; i < imagesArray.length; i++) {
 
-    const imageURL = imagesArray[i]
+    const imageURL = imagesArray[i];
     
     let classImage = 'immagine attiva'
 //partendo dalla prima slide do la classe "active"
@@ -32,17 +32,35 @@ for (let i = 0; i < imagesArray.length; i++) {
             <img src="${ imageURL }">
         </div>
     `;
-
+    itemListDOMElement.innerHTML += itemsHTML;
 }
-
+    const nextButton = document.querySelector('next');
+    const prevButton = document.querySelector('prev');
+    console.log(nextButton, prevButton)
+    const itemElements = document.getElementsByClassName('.item');
 
 //click sul pulsante next per prossima slide
-nextButton.addEventListener('click', function() {
+    nextButton.addEventListener('click', function() {
+    console.log('slide successiva')
+//togliere la classe active
+    itemElements[Index].classList.remove('active');
+ 
+//incremento di 1 l'index
+    Index++
+//aggiungere la classe active alla slide seguente
+    itemElements[Index].classList.add('active');
+    
 
 })
 //click su pulsante prev per slide precedente
 
-prevButton.addEventListener('click', function() {
+    prevButton.addEventListener('click', function() {
+    console.log('slide precedente')
+    itemElements[Index].classList.remove('active');
+
+    Index++
+
+    itemElements[Index].classList.add('active');
 
 })
 
