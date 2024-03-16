@@ -15,40 +15,47 @@ const imagesArray = [
 
 //far comparire la prima immagine (active)
 //far slidare le immagini seguenti
-for (let i = 0; i < imagesArray.length; i++) {
+// for (let i = 0; i < imagesArray.length; i++) {
 
-    const imageURL = imagesArray[i];
+//     const imageURL = imagesArray[i];
     
-    let classImage = 'immagine attiva'
-//partendo dalla prima slide do la classe "active"
-    if (i === 0) {
-        classImage = ' active'
-    }
+//     let classImage = 'immagine attiva'
+// //partendo dalla prima slide do la classe "active"
+//     if (i === 0) {
+//         classImage = ' active'
+//     }
 
-    const itemsHTML = 
+//     const itemsHTML = 
+//     `
+//         <div class="item ${classImage}">
+//             <img src="${ imageURL }">
+//         </div>
+//     `;
+//     itemListDOMElement.innerHTML += itemsHTML;
+// }
 
-    `
-        <div class="item ${classImage}">
-            <img src="${ imageURL }">
-        </div>
-    `;
-    itemListDOMElement.innerHTML += itemsHTML;
-}
-    const nextButton = document.querySelector('next');
-    const prevButton = document.querySelector('prev');
+
+    const nextButton = document.querySelector('.next');
+    const prevButton = document.querySelector('.prev');
     console.log(nextButton, prevButton)
-    const itemElements = document.getElementsByClassName('.item');
+    const itemElements = document.getElementsByClassName('item');
 
 //click sul pulsante next per prossima slide
+
     nextButton.addEventListener('click', function() {
     console.log('slide successiva')
 //togliere la classe active
     itemElements[Index].classList.remove('active');
- 
 //incremento di 1 l'index
-    Index++
+//vedo la lunghezza dell'array e lo incremento tranne quando si tratta dell'ultima immagine
+    if (imagesArray.length -1 === Index) {
+        Index = 0
+    } else {
+        Index++
+    }
 //aggiungere la classe active alla slide seguente
     itemElements[Index].classList.add('active');
+    
     
 
 })
@@ -56,11 +63,14 @@ for (let i = 0; i < imagesArray.length; i++) {
 
     prevButton.addEventListener('click', function() {
     console.log('slide precedente')
-    itemElements[Index].classList.remove('active');
+    itemElements[Index].classList.remove('active'); 
+    if (Index === 0) {
+        Index = imagesArray.length -1
+    } else {
+        Index--
+    }
 
-    Index++
 
     itemElements[Index].classList.add('active');
-
 })
 
